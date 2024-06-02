@@ -28,7 +28,7 @@ app.on('error', err => {
   // console.log('server error', err)
 });
 
-app.listen(80);
+app.listen(8080);
 console.log(`服务端启动好了亲(${3000})`);
 
 function parseData(ctx) {
