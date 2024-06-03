@@ -13,6 +13,11 @@ app.use(async (ctx, next) => {
   ctx.set('Access-Control-Allow-Origin', '*');
   ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
   ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+  console.log(ctx.method)
+  if (ctx.method == 'OPTIONS') {
+    ctx.body = 200;
+    ctx.status = 204;
+  }
   if (ctx.request.method == "POST") {
     const mongoClient = new MongoClient("mongodb://localhost:27017/");
     mongoClient.connect();
@@ -21,7 +26,7 @@ app.use(async (ctx, next) => {
     if (c.length != 1) db.createCollection("user")
     let res = await handle[ctx.request.url.split("/")[1]][ctx.request.url.split("/")[2]](await parseData(ctx), db);
     await mongoClient.close();
-    console.log(ctx.url+2);
+    console.log(ctx.url + 2);
     ctx.response.status = 200;
     ctx.response.body = res;
   }
