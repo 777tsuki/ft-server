@@ -10,7 +10,7 @@ const handle = {
 const app = new Koa();
 app.use(async (ctx, next) => {
   console.log(ctx.url);
-  ctx.set('Access-Control-Allow-Origin', '*');
+  ctx.set('Access-Control-Allow-Origin', 'localhost:2053');
   ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
   ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   if (ctx.request.method == "POST") {
