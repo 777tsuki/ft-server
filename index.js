@@ -1,6 +1,8 @@
+const path = require("path");
+
 const fork = require('child_process').fork;
 const workers = [];
-const appsPath = ['./app/app.js'];
+const appsPath = [path.resolve(__dirname, './app/app.js')];
 function createWorker(appPath) {
   const worker = fork(appPath);
   worker.on('exit', function () {
