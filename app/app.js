@@ -10,7 +10,7 @@ const handle = {
 const app = new Koa();
 app.use(async (ctx, next) => {
   console.log(ctx.url);
-  ctx.set('Access-Control-Allow-Origin', 'localhost:2053');
+  ctx.set('Access-Control-Allow-Origin', '*');
   ctx.set('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
   ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   if (ctx.request.method == "POST") {
@@ -20,7 +20,7 @@ app.use(async (ctx, next) => {
     let c = await db.listCollections({ name: "user" }).toArray();
     if (c.length != 1) db.createCollection("user")
     let res = await handle[ctx.request.url.split("/")[1]][ctx.request.url.split("/")[2]](await parseData(ctx), db);
-    // await mongoClient.close();
+    await mongoClient.close();
     console.log(ctx.url+2);
     ctx.response.status = 200;
     ctx.response.body = res;
