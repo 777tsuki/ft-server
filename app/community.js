@@ -6,7 +6,6 @@ const community = {
     let records = [];
     result.map(account => records.push(...account.archive.record));
     records = records.filter(r => r.name.includes("通关"));
-    console.log(records);
     return records;
   }
 }
