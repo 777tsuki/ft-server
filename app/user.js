@@ -1,11 +1,7 @@
 const user = {
   upload: async function (req, db) {
     const User = db.collection("user");
-    await User.updateOne({ user: req.user }, { $set: { 
-      archive: req.info.archive,
-      explore: req.info.explore,
-      data: req.info.data,
-     } });
+    await User.updateOne({ user: req.user }, { $set: req.info });
     return { msg: "OK" }
   },
   login: async function (req, db) {
